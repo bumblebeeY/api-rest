@@ -8,12 +8,7 @@ const CONF = {
   port:6001,
   //数据库配置
   mq:{
-    host:'39.105.209.146',
-    port:'15672',
-    user:'admin',
-    password:'gy11070809xam',
-    maxAge:1800000,
-    redis_maxAge:1800
+
   },
   mysql: {
     host: 'localhost',
