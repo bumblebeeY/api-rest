@@ -4,16 +4,16 @@
  * 创建日期：2019/4/25
  * 历史修订：
  */
-let log4js = require('log4js');
+import { configure, getLogger } from './log4js';
 let logsConfig = require('../configuration/logs.js');
 //加载配置文件
-log4js.configure(logsConfig);
+configure(logsConfig);
 //调用预先定义的日志名称
-let resLogger = log4js.getLogger("resLogger");
-let errorLogger = log4js.getLogger("errorLogger");
-let handleLogger = log4js.getLogger("handleLogger");
-let mqLogger = log4js.getLogger("mqLogger");
-let consoleLogger = log4js.getLogger();
+let resLogger = getLogger("resLogger");
+let errorLogger = getLogger("errorLogger");
+let handleLogger = getLogger("handleLogger");
+let mqLogger = getLogger("mqLogger");
+let consoleLogger = getLogger();
 // 格式化日志文本 加上日志头尾和换行方便查看 ==>  普通日志、请求日志、响应日志、操作日志、错误日志
 let formatText = {
   info: function(info) {
@@ -91,7 +91,7 @@ let formatText = {
   }
 };
 
-module.exports = {
+export  default {
   //封装普通日志
   logInfo: function(info) {
     if (info) {

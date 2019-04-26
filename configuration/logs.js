@@ -4,13 +4,13 @@
  * 创建日期：2019/4/25
  * 历史修订：
  */
-const {LOGGER} = require('../configuration/constants');
+import { LOGGER } from './constants'
 //  输出日志地址
 const ERR_LOG_PATH = LOGGER.BASE_PATH + LOGGER.ERR_PATH + "/" + LOGGER.ERR_FILE_NAME;
 const RES_LOG_PATH = LOGGER.BASE_PATH + LOGGER.RES_PATH + "/" + LOGGER.RES_FILE_NAME;
 const HANDLE_LOG_PATH = LOGGER.BASE_PATH + LOGGER.HANDLE_PATH + "/" + LOGGER.HANDLE_FILE_NAME;
 const MQ_LOG_PATH = LOGGER.BASE_PATH + LOGGER.MQ_PATH + "/" + LOGGER.MQ_FILE_NAME;
-module.exports = {
+export default {
   //日志格式等设置
   appenders: {
     "rule-console": {"type": "console"},

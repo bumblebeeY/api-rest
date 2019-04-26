@@ -1,11 +1,12 @@
-const Koa = require('koa');
-const app = new Koa();
-const http = require('http');
-const views = require('koa-views');
-const response = require('./middlewares/response');
-const bodyParser = require('./middlewares/bodyparser');
+import Koa from 'koa'
+import http from 'http';
+import views from 'koa-views';
+import response from './middlewares/response'
+import bodyParser from './middlewares/bodyparser';
+
 const logsUtil = require('./utils/logs.js');
 const conf = require('./config');
+const app = new Koa();
 app.use(views(__dirname + '/views', {map: {html: 'underscore'}}));
 // 使用响应处理中间件
 app.use(response);

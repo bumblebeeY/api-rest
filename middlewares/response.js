@@ -3,7 +3,7 @@ const logsUtil = require('../utils/logs.js');
 /**
  * 响应处理模块
  */
-module.exports = async function (ctx, next) {
+export default async function (ctx, next) {
   const start = new Date(); // 响应开始时间
   let intervals;
   try {

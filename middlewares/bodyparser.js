@@ -6,7 +6,7 @@ const bodyParser = require('koa-bodyparser')
  * 这里对所有 Content-Type 为 text/xml 的用 JSON 解析
  * 如果你在消息推送后台配置的是 xml，请直接将 detectJSON 设置为空
  */
-module.exports = (opts = {}) => {
+export default (opts = {}) => {
   const options = Object.assign({}, {
     detectJSON(ctx) {
       if (ctx.request.type === 'text/xml') {

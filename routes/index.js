@@ -4,8 +4,10 @@
  * 创建日期：2019/4/25
  * 历史修订：
  */
-const Router  = require('koa-router');
-const router = new Router();
+const Router = require('koa-router');
+const router = new Router({
+  prefix: '/api'
+});
 const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');

@@ -1,6 +1,6 @@
 {
   "name": "api-rest",
-  "script": "app.js",
+  "script": "index.js",
   "cwd": "./",
   "exec_mode": "fork",
   "watch": true,

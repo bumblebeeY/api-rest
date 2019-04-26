@@ -50,6 +50,14 @@ const constants = {
   LOGIN_STATE: {
     SUCCESS: 1,  // 登陆成功
     FAILED: 0    // 登录失败
+  },
+  /**
+   * MQ 服务常量
+   */
+  MQ:{
+    QUEUE_COMMON: "service-common", // 公用服务
+    QUEUE_ORDER: "service-order", // 订单服务
+    QUEUE_COMMON_TEST: "service-common-test", // 测试服务
   }
 };
-module.exports = constants;
+export default constants
