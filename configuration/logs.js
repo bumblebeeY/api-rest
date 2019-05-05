@@ -4,12 +4,13 @@
  * 创建日期：2019/4/25
  * 历史修订：
  */
-import { LOGGER } from './constants'
+import Constants from './constants'
+
 //  输出日志地址
-const ERR_LOG_PATH = LOGGER.BASE_PATH + LOGGER.ERR_PATH + "/" + LOGGER.ERR_FILE_NAME;
-const RES_LOG_PATH = LOGGER.BASE_PATH + LOGGER.RES_PATH + "/" + LOGGER.RES_FILE_NAME;
-const HANDLE_LOG_PATH = LOGGER.BASE_PATH + LOGGER.HANDLE_PATH + "/" + LOGGER.HANDLE_FILE_NAME;
-const MQ_LOG_PATH = LOGGER.BASE_PATH + LOGGER.MQ_PATH + "/" + LOGGER.MQ_FILE_NAME;
+const ERR_LOG_PATH = Constants.LOGGER.BASE_PATH + Constants.LOGGER.ERR_PATH + "/" + Constants.LOGGER.ERR_FILE_NAME;
+const RES_LOG_PATH = Constants.LOGGER.BASE_PATH + Constants.LOGGER.RES_PATH + "/" + Constants.LOGGER.RES_FILE_NAME;
+const HANDLE_LOG_PATH = Constants.LOGGER.BASE_PATH + Constants.LOGGER.HANDLE_PATH + "/" + Constants.LOGGER.HANDLE_FILE_NAME;
+const MQ_LOG_PATH = Constants.LOGGER.BASE_PATH + Constants.LOGGER.MQ_PATH + "/" + Constants.LOGGER.MQ_FILE_NAME;
 export default {
   //日志格式等设置
   appenders: {
@@ -22,7 +23,7 @@ export default {
       "encoding": "utf-8",
       "maxLogSize": 1000,
       "numBackups": 3,
-      "path": LOGGER.ERR_PATH
+      "path": Constants.LOGGER.ERR_PATH
     },
     "resLogger": {
       "type": "dateFile",
@@ -32,7 +33,7 @@ export default {
       "encoding": "utf-8",
       "maxLogSize": 1000,
       "numBackups": 3,
-      "path": LOGGER.RES_PATH
+      "path": Constants.LOGGER.RES_PATH
     },
     "handleLogger": {
       "type": "dateFile",
@@ -42,7 +43,7 @@ export default {
       "encoding": "utf-8",
       "maxLogSize": 1000,
       "numBackups": 3,
-      "path": LOGGER.HANDLE_PATH
+      "path": Constants.LOGGER.HANDLE_PATH
     },
     "mqLogger": {
       "type": "dateFile",
@@ -52,7 +53,7 @@ export default {
       "encoding": "utf-8",
       "maxLogSize": 1000,
       "numBackups": 3,
-      "path": LOGGER.MQ_PATH
+      "path": Constants.LOGGER.MQ_PATH
     },
   },
   //供外部调用的名称和对应设置定义
@@ -63,5 +64,5 @@ export default {
     "handleLogger": {"appenders": ["handleLogger"], "level": "all"},
     "mqLogger": {"appenders": ["mqLogger"], "level": "info"}
   },
-  "baseLogPath": LOGGER.BASE_PATH
+  "baseLogPath": Constants.LOGGER.BASE_PATH
 }

@@ -1,9 +1,9 @@
-const { ERRORS } = require('../configuration/constants');
-const logsUtil = require('../utils/logs.js');
+import Constants from '../configuration/constants'
+import  logsUtil from '../utils/logs.js';
 /**
  * 响应处理模块
  */
-export default async function (ctx, next) {
+export default async function(ctx, next) {
   const start = new Date(); // 响应开始时间
   let intervals;
   try {
@@ -16,7 +16,7 @@ export default async function (ctx, next) {
     ctx.status = 200;
     ctx.body = {
       code: e.status,
-      msg: ERRORS.HTTPERR[e.status] || e && e.message ? e.message : e.toString()
+      msg: Constants.ERRORS.HTTPERR[e.status] || e && e.message ? e.message : e.toString()
     };
   }
 };

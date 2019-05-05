@@ -4,8 +4,8 @@
  * 创建日期：2019/4/25
  * 历史修订：
  */
-const path = require('path');
-const constants = {
+import path from 'path'
+export default {
   /**
    * 错误信息常量
    */
@@ -60,4 +60,3 @@ const constants = {
     QUEUE_COMMON_TEST: "service-common-test", // 测试服务
   }
 };
-export default constants

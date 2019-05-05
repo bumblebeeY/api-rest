@@ -1,3 +1,5 @@
 node_modules
 logs
-security.json
+/security.js
+/.idea/
+/api-rest.iml

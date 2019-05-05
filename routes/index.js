@@ -4,17 +4,20 @@
  * 创建日期：2019/4/25
  * 历史修订：
  */
-const Router = require('koa-router');
+import Router from 'koa-router'
+import logsUtil from '../utils/logs.js';
+import _ from 'lodash'
+import fs from 'fs'
+import path from 'path'
+import { Client } from '../rabbitMQ';
+
 const router = new Router({
   prefix: '/api'
 });
-const _ = require('lodash');
-const fs = require('fs');
-const path = require('path');
 /**
  * 初始化d文件夹下定义的路由
  */
-const initRouters = (d => {
+const initRouters = d => {
   // 获得当前文件夹下的所有的文件夹和文件
   const [dirs, files] = _(fs.readdirSync(d)).partition(p => fs.statSync(path.join(d, p)).isDirectory());
   // 映射文件
@@ -24,5 +27,12 @@ const initRouters = (d => {
       service.init && service.init(router);
     }
   });
-})(path.join(__dirname));
+};
+new Client().then((res) => {
+  logsUtil.logMQ('rabbitMQ is ready');
+  global.MQ = res.Producer;
+  initRouters(path.join(__dirname))
+}).catch((e) => {
+  logsUtil.logMQ(e)
+});
 module.exports = router;

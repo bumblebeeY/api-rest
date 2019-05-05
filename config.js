@@ -8,15 +8,21 @@ const CONF = {
   port:6001,
   //数据库配置
   mq:{
-
+    host:'39.105.209.146',
+    port:'5672',
+    user:'admin',
+    password:'test',
+    maxAge:1800000,
+    redis_maxAge:1800
   },
   mysql: {
     host: 'localhost',
     port: 3306,
     user: 'root',
     db: 'api',
-    pass: 'gy11070809xam',
+    pass: 'test',
     char: 'utf8mb4'
   },
 };
-module.exports = process.env.NODE_ENV === 'production' ? Object.assign({}, CONF, require('/data/config/api-resr.js')) : CONF;
+console.log(process.env.NODE_ENV);
+export default process.env.NODE_ENV === 'production' ? Object.assign({}, CONF, require('./security.js')) : CONF;

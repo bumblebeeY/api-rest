@@ -1,11 +1,12 @@
-import Koa from 'koa'
+import Koa from 'koa2'
 import http from 'http';
 import views from 'koa-views';
 import response from './middlewares/response'
 import bodyParser from './middlewares/bodyparser';
-
-const logsUtil = require('./utils/logs.js');
-const conf = require('./config');
+// 引入路由分发
+import router from './routes'
+import  logsUtil from './utils/logs.js';
+import conf from './config'
 const app = new Koa();
 app.use(views(__dirname + '/views', {map: {html: 'underscore'}}));
 // 使用响应处理中间件
@@ -13,8 +14,6 @@ app.use(response);
 // 解析请求体
 app.use(bodyParser());
 
-// 引入路由分发
-const router = require('./routes');
 app.use(router.routes()).use(router.allowedMethods());
 
 let server = http.createServer(app.callback());

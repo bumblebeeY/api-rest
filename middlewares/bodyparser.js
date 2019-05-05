@@ -1,4 +1,4 @@
-const bodyParser = require('koa-bodyparser')
+import bodyParser from 'koa-bodyparser'
 /**
  * 这里做一个兼容
  * 由于微信方面客服接口 post 过来的数据是 JSON

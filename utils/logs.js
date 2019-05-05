@@ -4,8 +4,8 @@
  * 创建日期：2019/4/25
  * 历史修订：
  */
-import { configure, getLogger } from './log4js';
-let logsConfig = require('../configuration/logs.js');
+import { configure, getLogger } from 'log4js';
+import logsConfig from '../configuration/logs.js'
 //加载配置文件
 configure(logsConfig);
 //调用预先定义的日志名称
@@ -91,7 +91,7 @@ let formatText = {
   }
 };
 
-export  default {
+export default {
   //封装普通日志
   logInfo: function(info) {
     if (info) {
