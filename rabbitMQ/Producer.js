@@ -17,6 +17,7 @@ export default class Producer {
   sendQueueMsg(content, type) {
     return new Promise((resolve, reject) => {
       this.ch.consume('222', (msg) => {
+        this.ch.ack(msg);
         resolve({data:msg});
       }, { noAck: true });
       this.ch.sendToQueue('222', Buffer.from(JSON.stringify(content)));
