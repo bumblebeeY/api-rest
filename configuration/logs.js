@@ -14,7 +14,7 @@ const MQ_LOG_PATH = Constants.LOGGER.BASE_PATH + Constants.LOGGER.MQ_PATH + "/" 
 export default {
   //日志格式等设置
   appenders: {
-    "rule-console": {"type": "console"},
+    "rule-console": { "type": "console" },
     "errorLogger": {
       "type": "dateFile",
       "filename": ERR_LOG_PATH,
@@ -58,11 +58,12 @@ export default {
   },
   //供外部调用的名称和对应设置定义
   categories: {
-    "default": {"appenders": ["rule-console"], "level": "all"},
-    "resLogger": {"appenders": ["resLogger"], "level": "info"},
-    "errorLogger": {"appenders": ["errorLogger"], "level": "error"},
-    "handleLogger": {"appenders": ["handleLogger"], "level": "all"},
-    "mqLogger": {"appenders": ["mqLogger"], "level": "info"}
+    "default": { "appenders": ["rule-console"], "level": "all" },
+    "resLogger": { "appenders": ["resLogger"], "level": "info" },
+    "errorLogger": { "appenders": ["errorLogger"], "level": "error" },
+    "handleLogger": { "appenders": ["handleLogger"], "level": "all" },
+    "mqLogger": { "appenders": ["mqLogger"], "level": "info" }
   },
-  "baseLogPath": Constants.LOGGER.BASE_PATH
+  baseLogPath: Constants.LOGGER.BASE_PATH,
+  open: true, // 是否开启
 }

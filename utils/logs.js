@@ -16,7 +16,7 @@ let mqLogger = getLogger("mqLogger");
 let consoleLogger = getLogger();
 // 格式化日志文本 加上日志头尾和换行方便查看 ==>  普通日志、请求日志、响应日志、操作日志、错误日志
 let formatText = {
-  info: function(info) {
+  info: function (info) {
     let logText = '';
     //响应日志头信息
     logText += "\n" + "***************info log start ***************" + "\n";
@@ -26,7 +26,7 @@ let formatText = {
     logText += "*************** info log end ***************" + "\n";
     return logText;
   },
-  request: function(req, resTime) {
+  request: function (req, resTime) {
     let logText = '';
     let method = req.method;
     //访问方法
@@ -49,7 +49,7 @@ let formatText = {
     logText += "response time: " + resTime + "\n";
     return logText;
   },
-  response: function(ctx, resTime) {
+  response: function (ctx, resTime) {
     let logText = '';
     //响应日志开始
     logText += "\n" + "*************** response log start ***************" + "\n";
@@ -63,7 +63,7 @@ let formatText = {
     logText += "*************** response log end ***************" + "\n";
     return logText;
   },
-  handle: function(info) {
+  handle: function (info) {
     let logText = '';
     //响应日志开始
     logText += "\n" + "***************info log start ***************" + "\n";
@@ -73,7 +73,7 @@ let formatText = {
     logText += "*************** info log end ***************" + "\n";
     return logText;
   },
-  error: function(ctx, err, resTime) {
+  error: function (ctx, err, resTime) {
     let logText = '';
     //错误信息开始
     logText += "\n" + "*************** error log start ***************" + "\n";
@@ -93,38 +93,38 @@ let formatText = {
 
 export default {
   //封装普通日志
-  logInfo: function(info) {
-    if (info) {
+  logInfo: function (info) {
+    if (info && logsConfig.open) {
       consoleLogger.info(formatText.info(info));
     }
   },
   //封装响应日志
-  logResponse: function(ctx, resTime) {
-    if (ctx) {
+  logResponse: function (ctx, resTime) {
+    if (ctx && logsConfig.open) {
       resLogger.info(formatText.response(ctx, resTime));
     }
   },
-  //封装响应日志
-  logRequest: function(ctx, resTime) {
-    if (ctx) {
+  //封装请求日志
+  logRequest: function (ctx, resTime) {
+    if (ctx && logsConfig.open) {
       resLogger.info(formatText.request(ctx, resTime));
     }
   },
   //封装操作日志
-  logHandle: function(res) {
-    if (res) {
+  logHandle: function (res) {
+    if (res && logsConfig.open) {
       handleLogger.info(formatText.handle(res));
     }
   },
   //封装操作日志
-  logMQ: function(res) {
-    if (res) {
-      mqLogger.info(formatText.info(res));
+  logMQ: function (type, res) {
+    if (res && logsConfig.open) {
+      mqLogger.info(formatText.info(`${type}:${res}`));
     }
   },
   //封装错误日志
-  logError: function(ctx, error, resTime) {
-    if (ctx && error) {
+  logError: function (ctx, error, resTime) {
+    if (ctx && error && logsConfig.open) {
       errorLogger.error(formatText.error(ctx, error, resTime));
     }
   }

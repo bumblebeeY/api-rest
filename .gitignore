@@ -3,3 +3,4 @@ logs
 /security.js
 /.idea/
 /api-rest.iml
+/package-lock.json

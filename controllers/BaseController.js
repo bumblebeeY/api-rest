@@ -5,34 +5,39 @@
  * 历史修订：
  */
 export default class BaseController {
+  constructor() {
 
-  /**
-   * [info description]
-   * @method info
-   * @param  {[type]} msg [description]
-   * @return {[type]}     [description]
-   */
-  info(msg) {
-    logger.info(msg);
   }
 
   /**
-   * [err description]
-   * @method err
-   * @param  {[type]} msg [description]
-   * @return {[type]}     [description]
+   * 生成MQ的消息
+   * @param ctrl 调用的控制类
+   * @param func 调用的方法名
+   * @param ctx koa上下文
+   * @returns {{ctrl: *, func: *, params: *}}
    */
-  err(msg) {
-    logger.err(msg);
+  generateMsg(ctrl, func, ctx) {
+    const params = this.extractParams(ctx);
+    return {
+      ctrl,
+      func,
+      params
+    }
   }
 
   /**
-   * [warn description]
-   * @method warn
-   * @param  {[type]} msg [description]
-   * @return {[type]}     [description]
+   * 提取请求的参数
+   * @param ctx koa上下文
    */
-  warn(msg) {
-    logger.warn(msg);
+  extractParams(ctx) {
+    if (ctx.method === 'GET') {
+      return ctx.query;
+    } else {
+      return ctx.body;
+    }
+  }
+
+  extractResponse(msg) {
+    return JSON.parse(msg.content)
   }
 }

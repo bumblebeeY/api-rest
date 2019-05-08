@@ -5,6 +5,7 @@
  * 历史修订：
  */
 import BaseController from './BaseController';
+import Constants from '../configuration/constants'
 
 export default class UserController extends BaseController {
   constructor(mq) {
@@ -12,14 +13,14 @@ export default class UserController extends BaseController {
     this.mq = mq;
   }
 
-  async login(ctx, next) {
-    const content = {
-      class: 'user',
-      func: 'getUserList',
-      content: {}
-    };
-   const res =await this.mq.sendQueueMsg(content, 'order');
-    console.log(res)
-    ctx.body=res;
+  /**
+   * 登录接口
+   * @param ctx
+   * @returns {Promise<string>}
+   */
+  async login(ctx) {
+    const userListMsg = this.generateMsg('UserController', 'getUserList', ctx);
+    const userListRes = await this.mq.sendQueueMsg(userListMsg, Constants.MQ.QUEUE_COMMON);
+    return ctx.body = this.extractResponse(userListRes);
   }
 }

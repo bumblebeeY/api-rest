@@ -5,16 +5,17 @@
  * 历史修订：
  */
 const CONF = {
-  port:6001,
-  //数据库配置
-  mq:{
-    host:'39.105.209.146',
-    port:'5672',
-    user:'admin',
-    password:'test',
-    maxAge:1800000,
-    redis_maxAge:1800
+  port: 6001,
+  // rabbitMQ配置
+  mq: {
+    host: '39.105.209.146',
+    port: '5672',
+    user: 'admin',
+    password: 'test',
+    maxAge: 1800000,
+    redis_maxAge: 1800
   },
+  //数据库配置
   mysql: {
     host: 'localhost',
     port: 3306,
@@ -24,5 +25,4 @@ const CONF = {
     char: 'utf8mb4'
   },
 };
-console.log(process.env.NODE_ENV);
 export default process.env.NODE_ENV === 'production' ? Object.assign({}, CONF, require('./security.js')) : CONF;

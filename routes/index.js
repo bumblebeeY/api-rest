@@ -10,7 +10,9 @@ import _ from 'lodash'
 import fs from 'fs'
 import path from 'path'
 import { Client } from '../rabbitMQ';
+import Constants from '../configuration/constants'
 
+const MQ_MSG_CONST = Constants.MQ_MSG;
 const router = new Router({
   prefix: '/api'
 });
@@ -28,11 +30,12 @@ const initRouters = d => {
     }
   });
 };
+
 new Client().then((res) => {
-  logsUtil.logMQ('rabbitMQ is ready');
-  global.MQ = res.Producer;
+  logsUtil.logMQ(MQ_MSG_CONST.CONNECT_TYPE, 'MQ连接成功！');
+  global.MQ = res.client;
   initRouters(path.join(__dirname))
 }).catch((e) => {
-  logsUtil.logMQ(e)
+  logsUtil.logMQ(MQ_MSG_CONST.ERR_WHEN_CONNECT, e);
 });
 module.exports = router;
