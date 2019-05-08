@@ -6,7 +6,6 @@
  */
 const CONF = {
   port: 6001,
-  //rabbitMQ配置
   mq: {
     host: '39.105.209.146',
     port: '5672',
