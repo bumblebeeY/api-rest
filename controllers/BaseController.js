@@ -14,14 +14,16 @@ export default class BaseController {
    * @param ctrl 调用的控制类
    * @param func 调用的方法名
    * @param ctx koa上下文
+   * @param needReply 是否需要消息回复
    * @returns {{ctrl: *, func: *, params: *}}
    */
-  generateMsg(ctrl, func, ctx) {
+  generateMsg(ctrl, func, ctx, needReply = true) {
     const params = this.extractParams(ctx);
     return {
       ctrl,
       func,
-      params
+      params,
+      needReply
     }
   }
 

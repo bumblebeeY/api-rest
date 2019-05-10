@@ -27,7 +27,7 @@ export default class Client {
       this.conn = await amqp.connect('amqp://' + conf.mq.user + ':' + conf.mq.password + '@' + conf.mq.host + ':' + conf.mq.port);
       return { client: this };
     } catch (err) {
-      logsUtil.logMQ(MQ_MSG_CONST.ERR_WHEN_CONNECT, err)
+      throw err;
     }
   }
 
@@ -44,17 +44,18 @@ export default class Client {
         const correlationId = uuid();
         ch.assertQueue(MQ_CONST.QUEUE_API_REST).then(function (ok) {
           //监听消息
-          ch.consume(MQ_CONST.QUEUE_API_REST, (msg) => {
+          content.needReply && ch.consume(MQ_CONST.QUEUE_API_REST, (msg) => {
             logsUtil.logMQ(MQ_MSG_CONST.RECEIVE_TYPE, JSON.stringify(msg.content));
             resolve(msg);
             ch.close();
           }, { noAck: true });
           // 发送mq消息
-          logsUtil.logMQ(MQ_MSG_CONST.SEND_TYPE, JSON.stringify(content))
           ch.sendToQueue(type, Buffer.from(JSON.stringify(content)), {
             replyTo: MQ_CONST.QUEUE_API_REST,
             correlationId: correlationId
           });
+          !content.needReply && resolve({ content: true });
+          logsUtil.logMQ(MQ_MSG_CONST.SEND_TYPE, JSON.stringify(content))
         })
       })
     } catch (err) {
