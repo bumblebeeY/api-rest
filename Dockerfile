@@ -4,6 +4,7 @@ RUN mkdir -p /home/project
 WORKDIR /home/project
 COPY package*.json ./
 RUN npm config set registry "https://registry.npm.taobao.org"
+RUN npm config set unsafe-perm true
 RUN npm install pm2 -g
 RUN npm install
 COPY . .
